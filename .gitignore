@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
@@ -40,3 +41,16 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+=======
+
+#fichiers npm
+node_modules/
+
+# fichiers de conf
+config/
+
+.env
+
+# fichiers de dépendances npm
+package-lock.json
+>>>>>>> 2812e61383aebcadbe5332559b0d33079d1a0887
