@@ -8,4 +8,4 @@ config/
 .env
 
 # fichiers de dépendances npm
-.package-lock.json
+package-lock.json
