@@ -1,0 +1,11 @@
+
+#fichiers npm
+node_modules/
+
+# fichiers de conf
+config/
+
+.env
+
+# fichiers de dépendances npm
+.package-lock.json
