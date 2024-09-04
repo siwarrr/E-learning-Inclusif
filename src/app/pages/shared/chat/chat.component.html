@@ -1,0 +1,29 @@
+<div class="chat-window">
+  <section class="chat__section" tabindex="0">
+    <div class="brand">
+      <span nz-icon nzType="message" nzTheme="outline"></span>
+      <h1 tabindex="0">{{ receiverName || 'Chat Room' }}</h1>
+    </div>
+    <div class="message__area"> 
+      <div *ngIf="!isContactSelected" class="empty-chat" tabindex="0">
+        <img src="assets/Images/chat.png" alt="Empty Chat" class="empty-chat-image" />
+        <p>{{'Welcome to the chat! Select a contact to start a conversation.'|translate}}</p>
+      </div>
+      <div *ngFor="let message of messages" [ngClass]="{ 'incoming': message.senderId !== userId, 'outgoing': message.senderId === userId }">
+        <div class="message">
+          <p *ngIf="message.text">{{ message.text }}</p>
+          <audio *ngIf="message.voiceMessageUrl" controls>
+            <source [src]="baseUrl + message.voiceMessageUrl" type="audio/webm">
+          </audio>
+          <small>{{ message.createdAt | date: 'medium' }}</small>
+        </div>
+      </div>
+    </div>
+    <div class="input-area" *ngIf="isContactSelected">
+      <textarea nz-input id="textarea" cols="30" rows="1" placeholder="{{'Write a message...'|translate}}" [(ngModel)]="messageText" (keydown.enter)="sendMessage()"></textarea>
+      <button class="record-button" tabindex="0" (mousedown)="startRecording()" (mouseup)="stopRecording()" (mouseleave)="stopRecording()" [disabled]="isRecording">
+        <i tabindex="0" class="fas fa-microphone"></i>
+      </button>
+    </div>
+  </section>
+</div>

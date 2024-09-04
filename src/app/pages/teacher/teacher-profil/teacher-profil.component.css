@@ -1,0 +1,24 @@
+.teacher-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrage vertical sur la page */
+    background-color: #f0f2f5; /* Couleur de fond */
+    padding: 20px; /* Espacement intérieur */
+  }
+  
+  .profile-header {
+    text-align: center; /* Centrage du contenu */
+  }
+  
+  .profile-name {
+    font-size: 2.5rem; /* Taille de police du nom */
+    font-weight: bold; /* Gras */
+    margin-bottom: 12px; /* Marge inférieure */
+  }
+  
+  .profile-title {
+    font-size: 1.5rem; /* Taille de police du titre */
+    color: #666; /* Couleur de texte plus douce */
+  }
+  

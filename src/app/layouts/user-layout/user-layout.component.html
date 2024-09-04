@@ -1,0 +1,118 @@
+<nz-layout class="userLayout">
+  <nz-header role="banner">
+    <div class="user-container ant-layout-content">
+      <div class="header-content">
+
+        <!-- Logo -->
+        <div class="logo">
+          <a routerLink="/learner" aria-label="AllLearn" tabindex="0">
+            <img
+              nz-image
+              src="assets/Images/logo.png"
+              alt="AllLearn"
+              class="logo-image"
+            />
+          </a>
+        </div>
+
+        <!-- Barre de navigation principale -->
+        <div class="nav-main">
+          <!-- Catégories -->
+          <div class="categories">
+            <a
+              nz-dropdown
+              [nzDropdownMenu]="menu"
+              nzPlacement="bottomLeft"
+              aria-haspopup="true"
+              tabindex="0"
+              (keydown.enter)="toggleDropdown('menu')" (nzVisibleChange)="onMenuVisibleChange(menuVisible)">
+              {{ 'Categories' | translate }}
+              <span nz-icon nzType="down"></span>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu" aria-label="Categories">
+              <ul nz-menu role="menu">
+                <!-- Pour chaque espace de cours, afficher les cours correspondants -->
+                <li nz-submenu *ngFor="let space of courseSpaces" [nzTitle]="space.title" tabindex="0" (keydown)="onKeyDown($event)">
+                  <ul role="menu">
+                    <li nz-menu-item *ngFor="let course of space.courses" (click)="navigateToCourse(course._id)" tabindex="0" (keydown.enter)="navigateToCourse(course._id)" (keydown.space)="navigateToCourse(course._id)">
+                      {{ course.title | translate }}
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+
+            <nz-input-group [nzSuffix]="suffixIconSearch" class="btn-search">
+              <input type="text" nz-input placeholder="{{ 'Search' | translate }}" #searchInput (keyup.enter)="onSearch(searchInput.value)" tabindex="0" />
+            </nz-input-group>
+            <ng-template #suffixIconSearch>
+              <span nz-icon nzType="search" (click)="onSearch(searchInput.value)" tabindex="0" (keydown.enter)="onSearch(searchInput.value)" (keydown.space)="onSearch(searchInput.value)"></span>
+              <app-search-results [searchResults]="searchResults"></app-search-results>
+            </ng-template>
+
+            <a nz-dropdown [nzDropdownMenu]="learningMenu" aria-haspopup="true" tabindex="0" (keydown.enter)="toggleDropdown(learningMenu)" (keydown.space)="toggleDropdown(learningMenu)">
+              {{ 'My Learning' | translate }}
+              <span nz-icon nzType="down"></span>
+            </a>
+            <nz-dropdown-menu #learningMenu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li nz-menu-item *ngFor="let course of enrolledCourses" (click)="navigateToCourse(course._id)" tabindex="0" (keydown.enter)="navigateToCourse(course._id)" (keydown.space)="navigateToCourse(course._id)">
+                  {{ course.title | translate }}
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+
+          <!-- Éléments à droite -->
+          <div class="ant-layout-header-right">
+            <a
+              nz-button
+              nzType="link"
+              aria-label="messages"
+              tabindex="0"
+              routerLink="chat"
+            >
+              {{ 'Messages' | translate }}
+            </a>
+            <button
+              nz-button
+              nzShape="round"
+              nz-dropdown
+              [nzDropdownMenu]="languageMenu"
+              class="ant-btn ant-btn-primary ant-btn-default"
+              style="font-weight: bolder;"
+              aria-label="language"
+              nzPlacement="topRight"
+              tabindex="0"
+              (keydown.enter)="toggleDropdown('languageMenu')" (keydown)="onButtonKeyDown($event, 'languageMenu')">
+              {{ 'Language' | translate }}
+              <span nz-icon nzType="down"></span>
+            </button>
+
+            <nz-dropdown-menu #languageMenu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item tabindex="0" (keydown)="onKeyDown($event)">
+                  <button nz-button nzType="primary" (click)="changeLanguage('fr')" aria-label="Language" tabindex="0">{{ 'french' | translate }}</button>
+                </li>
+                <li nz-menu-item tabindex="0" (keydown)="onKeyDown($event)">
+                  <button nz-button nzType="primary" (click)="changeLanguage('en')" aria-label="Language" tabindex="0">{{ 'english' | translate }}</button>
+                </li>
+                <li nz-menu-item tabindex="0" (keydown)="onKeyDown($event)">
+                  <button nz-button nzType="primary" (click)="changeLanguage('ar')" aria-label="Language" tabindex="0">{{ 'arabic' | translate }}</button>
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+
+            <a nzType="logout" aria-label="logout" tabindex="0">
+              <span nz-icon nzType="logout" nzTheme="outline" (click)="logout()" tabindex="0" (keydown.enter)="logout()" (keydown.space)="logout()"></span>
+              {{ 'Logout' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nz-header>
+  <nz-content tabindex="0" role="main">
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>

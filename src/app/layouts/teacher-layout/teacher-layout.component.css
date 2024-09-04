@@ -1,0 +1,88 @@
+.layout {
+  min-height: 100vh;
+}
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 24px 16px 0;
+}
+.footer {
+  color: black;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-title {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.footer-description {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.contact-button {
+  margin-bottom: 30px;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 30px;
+}
+
+.contact-item {
+  text-align: left;
+}
+
+.contact-title {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.contact-detail {
+  font-size: 1em;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1.5em;
+}
+
+.social-icon {
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.social-icon:hover {
+  color: #007bff;
+}
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  /* Ajustez la hauteur minimale en fonction de vos besoins */
+  min-height: 600px; /* ou tout autre valeur appropriée */
+}
+
+nz-footer {
+  text-align: center;
+}

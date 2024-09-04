@@ -1,0 +1,43 @@
+<nz-layout>
+    <nz-sider nzCollapsible nzWidth="200px">
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="dark" nzMode="inline">
+        <li nz-menu-item>
+          <span nz-icon nzType="pie-chart"></span>
+          <span routerLink="/admin">statistics</span>
+        </li>
+        <li nz-menu-item>
+          <span nz-icon nzType="alert"></span> 
+          <span routerLink="reclamations">Reclamations</span>
+        </li>
+        <li nz-submenu nzTitle="Users" nzIcon="user">
+          <ul>
+            <li nz-menu-item routerLink="teachers">Teachers</li>
+            <li nz-menu-item routerLink="learners">Learners</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Courses Spaces" nzIcon="sketch">
+          <ul>
+            <li nz-menu-item routerLink="primarySpace">Primary Space</li>
+            <li nz-menu-item routerLink="highSchoolSpace">High School Space</li>
+            <li nz-menu-item routerLink="universitySpace">University Space</li>
+          </ul>
+        </li>
+        <li nz-menu-item>
+          <span nz-icon nzType="logout"></span> 
+          <span (click)="logout()">Logout</span>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header></nz-header>
+      <nz-content>
+        <nz-breadcrumb>
+          <nz-breadcrumb-item *ngFor="let item of breadcrumbItems">{{ item }}</nz-breadcrumb-item>
+        </nz-breadcrumb>        
+        <div class="inner-content">
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>  
+    </nz-layout>
+  </nz-layout>

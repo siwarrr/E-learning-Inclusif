@@ -1,0 +1,65 @@
+<nz-layout class="layout">
+  <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+    <div class="logo">
+      <a routerLink="/teacher">
+        <span nz-icon nzType="home" nzTheme="outline">
+        </span>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item>
+        <span nz-icon nzType="user"></span>
+        <span routerLink="profil">{{'My Profil'| translate}}</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="video-camera"></span>
+        <span routerLink="courses">{{'My Courses'| translate}}</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="team"></span>
+        <span routerLink="chat">{{'Communication' | translate}}</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="dashboard" nzTheme="outline"></span>
+        <span routerLink="dashboard">{{'Dashboard'| translate}}</span>
+      </li>
+
+      <li nz-menu-item>
+        <span nz-icon nzType="logout" nzTheme="outline"></span>
+        <span (click)="logout()">{{'Logout'| translate}}</span>
+      </li>
+
+    </ul>
+
+  </nz-sider>
+  <nz-layout>
+    <nz-header></nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer class="footer" tabindex="0">
+      <div class="footer-content">
+        <h2 class="footer-title">{{'Talk To Us'|translate}}</h2>
+        <p class="footer-description">{{'Feel free to call, email, or hit us up on our social media accounts.'|translate}}</p>
+        <button nz-button nzType="default" class="contact-button">{{'Contact Us'|translate}}</button>
+        <div class="contact-info">
+          <div class="contact-item">
+            <h4 class="contact-title">{{'Phone'|translate}}</h4>
+            <p class="contact-detail">(216) 54 906 781</p>
+          </div>
+          <div class="contact-item">
+            <h4 class="contact-title">{{'Email'|translate}}</h4>
+            <p class="contact-detail">allLearn&#64;learningsite.com</p>
+          </div>
+        </div>
+        <div class="social-icons">
+          <i nz-icon nzType="facebook" class="social-icon"></i>
+          <i nz-icon nzType="twitter" class="social-icon"></i>
+          <i nz-icon nzType="instagram" class="social-icon"></i>
+        </div>
+      </div>
+    </nz-footer>
+  </nz-layout>
+</nz-layout>

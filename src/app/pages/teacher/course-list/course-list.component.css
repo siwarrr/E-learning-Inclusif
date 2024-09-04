@@ -1,0 +1,16 @@
+.Delete {
+    display: inline-block; /* Afficher le bouton Delete sur la même ligne */
+    margin-left: 8px; /* Marge à gauche pour séparer les boutons */
+  }
+  
+  .Participants {
+    display: inline-block; /* Afficher le bouton Participants sur la même ligne */
+    margin-left: 8px; /* Marge à gauche pour séparer les boutons */
+  }
+  .Edit {
+    display: inline-block;
+    margin-left: 8px;
+    color: #1890ff; /* Couleur du texte */
+    text-decoration: underline; /* Souligner le texte pour le rendre plus visible */
+    cursor: pointer; /* Changer le curseur lorsque survolé pour indiquer qu'il est cliquable */
+  }

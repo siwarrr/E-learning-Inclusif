@@ -1,0 +1,6 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Session Expired" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+      <p>{{'Your session has expired. Please log in again.'| translate}}</p>
+    </ng-container>
+</nz-modal>
+  

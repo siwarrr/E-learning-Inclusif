@@ -1,0 +1,174 @@
+:host {
+  text-align: center;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #F8F8F8;
+  font-family: 'Roboto', sans-serif;
+}
+
+section.chat__section {
+  width: 800px;
+  max-width: 90%;
+  background: #fff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.empty-chat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.empty-chat-image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.empty-chat p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+.brand {
+  padding: 20px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.brand h1 {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #444;
+  margin-left: 10px;
+}
+
+.message__area {
+  height: 500px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-top: 40px;
+  background: #fafafa;
+}
+
+.message-input {
+  display: flex;
+  align-items: center;
+  background: #FBFBFB;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-input textarea {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  outline: none;
+  background: transparent;
+  resize: none;
+}
+
+.message-input i {
+  font-size: 24px;
+  color: #787986;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.message {
+  padding: 20px; 
+  border-radius: 10px; 
+  margin-bottom: 20px;
+  max-width: 360px;
+  position: relative;
+}
+
+.incoming {
+  background: #e9eafd;
+  color: #020202;
+  margin-right: auto;
+  margin-top: 5px;
+  border-radius: 8px;
+}
+
+.outgoing {
+  background: #c5c3f5;
+  color: #020202;
+  margin-left: auto;
+  margin-top: 5px;
+  border-radius: 8px;
+}
+
+.message h4 {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.message p {
+  margin: 0;
+}
+
+.message small {
+  color: #999;
+}
+
+.chat-window {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.record-button {
+  background: #6200ea;
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+  outline: none;
+}
+.input-area {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  border-top: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 0 0 8px 8px;
+}
+button:focus {
+  outline: 2px solid blue; /* Adjust the color and thickness as needed */
+  background-color: #f0f0f0; /* Optional: Change background color on focus */
+}

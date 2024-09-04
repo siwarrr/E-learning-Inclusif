@@ -1,0 +1,19 @@
+<nz-list>
+    <ng-container *ngFor="let course of primarySpaceCourses">
+      <nz-list-item>
+        <nz-list-item-meta
+          [nzDescription]="course.description" 
+        >
+          <nz-list-item-meta-title>
+            <a>{{ course.title }}</a>
+          </nz-list-item-meta-title>
+        </nz-list-item-meta>
+         {{course.teacher}}
+        <ul nz-list-item-actions>
+          <nz-list-item-action><a (click)="more(course._id)">More</a></nz-list-item-action>
+          <nz-list-item-action><a nz-button nzType="link" (click)="showConfirm(course._id)" nzDanger>Delete</a></nz-list-item-action>
+        </ul>
+      </nz-list-item>
+    </ng-container>
+  </nz-list>
+  

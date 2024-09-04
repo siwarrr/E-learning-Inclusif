@@ -1,0 +1,17 @@
+p {
+    margin: 0;
+  }
+  
+  .custom-card {
+    border-radius: 8px; /* Bordure arrondie pour les cartes */
+    overflow: hidden; /* Assurez-vous que le contenu ne dépasse pas les bords arrondis */
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .custom-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet de survol */
+  }
+  
+  
+  

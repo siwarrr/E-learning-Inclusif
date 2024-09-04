@@ -1,0 +1,47 @@
+<div class="chatbot-header">
+    <h3 style="font-size:1.1rem;">
+        <span nz-icon nzType="robot" nzTheme="outline"></span>
+        {{'Chat with Us'|translate}}
+    </h3>
+    <button class="close-button" (click)="closeChatbot()" tabindex="0">
+      <span nz-icon nzType="close" nzTheme="outline"></span>
+    </button>
+  </div>
+  <div class="chatbot-body">
+    <div *ngFor="let message of messages; let i = index" class="chatbot-message" 
+         [ngClass]="{'user-message': message.startsWith('User'), 'chatbot-message left': message.startsWith('ChatBot')}">
+      <p #messageElement [innerHTML]="message"></p>
+      <button (click)="speakResponse(message)" tabindex="0">
+        <span nz-icon nzType="sound" nzTheme="outline"></span>
+      </button>
+      <button (click)="pauseSpeech()" tabindex="0">
+        <span nz-icon nzType="pause" nzTheme="outline"></span>
+      </button>
+      <button (click)="resumeSpeech()" tabindex="0">
+        <span nz-icon nzType="caret-right" nzTheme="outline"></span>
+      </button>
+      <button (click)="cancelSpeech()" tabindex="0">
+        <span nz-icon nzType="close" nzTheme="outline"></span>
+      </button>
+    </div>
+  </div>
+  <div class="chatbot-footer">
+    <input type="text" [(ngModel)]="newMessage" placeholder="{{'Type a message'|translate}}" (keydown)="handleKeyDown($event)" tabindex="0" />
+    <button (click)="sendMessage()" tabindex="0">
+        <span nz-icon nzType="send" nzTheme="outline"></span>
+    </button>
+    <div class="footer-actions">
+        <button (click)="startRecording()" tabindex="0">
+            <span nz-icon nzType="audio" nzTheme="outline"></span>
+        </button>
+        <button (click)="stopRecording()" tabindex="0">
+            <span nz-icon nzType="send" nzTheme="outline"></span>
+        </button>
+        <select [(ngModel)]="selectedLanguage" tabindex="0" aria-label="Select Language">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+  </div>
+  

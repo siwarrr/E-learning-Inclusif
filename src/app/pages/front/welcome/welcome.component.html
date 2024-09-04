@@ -1,0 +1,136 @@
+<nz-layout>
+<nz-content tabindex="0" role="main">
+    
+  <div class="accessibility-controls">
+    <button nz-button (click)="zoomIn()">{{'Zoom In'|translate}}</button>
+    <button nz-button (click)="zoomOut()">{{'Zoom Out'|translate}}</button>
+    <button nz-button (click)="resetZoom()">{{'Reset Zoom'|translate}}</button>
+  </div>
+
+    <div class="inner-content" tabindex="0" [ngStyle]="{'transform': 'scale(' + zoomLevel + ')'}">
+      <!--tabindex pour rendre le contenu interagissable par le clavier -->
+      <div class="carousel-container">
+        <nz-carousel nzAutoPlay nzAutoPlaySpeed="5000" aria-label="Carousel" tabindex="0">
+          <div nz-carousel-content>
+            <img src="assets/Images/1.png" alt="Image 1" class="carousel-image">
+          </div>
+          <div nz-carousel-content>
+            <img src="assets/Images/2.png" alt="Image 2" class="carousel-image">
+          </div>
+          <div nz-carousel-content>
+            <img src="assets/Images/3.png" alt="Image 3" class="carousel-image">
+          </div>
+          <div nz-carousel-content>
+            <img src="assets/Images/4.png" alt="Image 4" class="carousel-image">
+          </div>
+        </nz-carousel>
+      </div>
+
+      <h2 class="section-title" tabindex="0">
+        <div class="our-services">
+          <span (click)="scrollToCourseSpaces()" tabindex="0" (keydown.enter)="scrollToCourseSpaces()">{{'Enjoy a great learning experience with free courses'|translate}}</span>
+          <span (click)="scrollToSpaceTeacher()" tabindex="0" (keydown.enter)="scrollToCourseSpaces()">{{'Teacher space where educators can manage their courses'|translate}}</span>
+          <span (click)="scrollToCourseSpaces()" tabindex="0" (keydown.enter)="scrollToCourseSpaces()">{{'Strengthen the relationship between teachers and learners through real-time chat'|translate}}</span>
+        </div>
+      </h2>
+      
+      <div class="course-spaces-section" id="courseSpaces" tabindex="0">
+        <h2 class="section-title">{{ 'Available Course Spaces' | translate }}</h2>
+        <div class="course-spaces-list">
+          <div nz-row [nzGutter]="16">
+            <div nz-col [nzSpan]="8" *ngFor="let courseSpace of courseSpaces">
+              <div class="course-card-container">
+                <nz-card class="course-card" tabindex="0">
+                  <div class="course-title">{{ courseSpace.title | translate }}</div>
+                  <p class="course-description">{{ courseSpace.description | translate }}</p>
+                  <div class="course-footer">
+                    <a nz-button nzType="primary" routerLink="login" tabindex="0">{{ 'See more!' | translate }}</a>
+                  </div>                
+                </nz-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>         
+
+      <nz-list tabindex="0">
+        <h2 class="section-title" style="text-align: left; margin-top: 90px; margin-bottom: 90px;" tabindex="0">{{ 'Top Categories!' | translate }}</h2>
+        <div role="region" aria-label="Top courses categories" tabindex="0" style="display: flex; overflow-x: auto; white-space: nowrap; background: #ececec;">
+          <ng-container *ngFor="let item of popularCourses">
+            <div style="flex: 0 0 auto; padding: 16px;" tabindex="0">
+              <nz-card class="course-card-categories" [nzTitle]="item.title" tabindex="0" [nzExtra]="extraTemplate">
+                <div class="image-container">
+                  <img *ngIf="item.imageUrl" [src]="item.imageUrl" alt="{{ item.title }}" class="course-image" />
+                </div>
+                <div class="course-description-categories">{{ item.description | slice:0:100 }}</div>
+                <div class="teacher-name">{{'Teacher :' | translate}} {{ item.teacherFullName }}</div>
+              </nz-card>
+              <ng-template #extraTemplate>
+                <a routerLink="login" tabindex="0">{{'Access' | translate}}</a>
+              </ng-template>
+            </div>
+          </ng-container>
+        </div>
+      </nz-list>                         
+
+      <!-- Section "Become a teacher" -->
+      <h2 class="section-title" style="margin-top: 90px;" tabindex="0">{{ 'Become a teacher!' | translate }}</h2>
+      <div class="teach-today-section" id="SpaceTeacher" tabindex="0">
+        <nz-card class="teach-today-card" [nzBordered]="false" tabindex="0">
+          <div class="teach-today-content" tabindex="0">
+            <div class="teach-today-text">
+              <h3>{{ 'Start teaching today!' | translate }}</h3>
+              <p>{{ "Start teaching with us and make a difference. Join our platform to inspire, educate, and shape the future generation. Together, let's create a brighter tomorrow." | translate }}</p>
+              <button nz-button (click)="SignUpOnClick()" nzType="default" tabindex="0">{{ 'Start' | translate }}</button>
+            </div>
+          </div>
+        </nz-card>
+      </div>
+ 
+    </div>
+
+
+    <div class="chatbot-wrapper" tabindex="0">
+      <button nz-button nz-popover nzType="primary" class="chatbot-button" [nzPopoverTitle]="chatbotPopoverTitle" nzPopoverTrigger="hover" (click)="toggleChatbot()" tabindex="0">
+        <span nz-icon nzType="wechat" nzTheme="outline"></span> 
+        {{'Chat with Us'|translate}}
+      </button>
+
+      <div *ngIf="isChatbotOpen" class="chatbot-container" tabindex="0">
+        <app-chatbot (chatbotClosed)="toggleChatbot()" tabindex="0" (keydown.enter)="toggleChatbot()"></app-chatbot>
+      </div>
+    </div>
+
+
+</nz-content>
+
+<nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="200" (nzOnClick)="notify()" tabindex="0">
+  <ng-template #tpl>
+    <div class="ant-back-top-inner" tabindex="0">{{'UP' | translate}}</div>
+  </ng-template>
+</nz-back-top>
+
+<nz-footer class="footer" tabindex="0">
+  <div class="footer-content" tabindex="0">
+    <h2 class="footer-title" tabindex="0">{{'Talk To Us' | translate}}</h2>
+    <p class="footer-description" tabindex="0">{{'Feel free to call, email, or hit us up on our social media accounts.' | translate}}</p>
+    <button nz-button nzType="default" class="contact-button" tabindex="0">{{'Contact Us' | translate}}</button>
+    <div class="contact-info" tabindex="0">
+      <div class="contact-item" tabindex="0">
+        <h4 class="contact-title" tabindex="0">{{'Phone' | translate}}</h4>
+        <p class="contact-detail" tabindex="0">(216) 54 906 781</p>
+      </div>
+      <div class="contact-item" tabindex="0">
+        <h4 class="contact-title" tabindex="0">{{'Email' | translate}}</h4>
+        <p class="contact-detail" tabindex="0">allLearn&#64;learningsite.com</p>
+      </div>
+    </div>
+    <div class="social-icons" tabindex="0">
+      <i nz-icon nzType="facebook" class="social-icon" tabindex="0"></i>
+      <i nz-icon nzType="twitter" class="social-icon" tabindex="0"></i>
+      <i nz-icon nzType="instagram" class="social-icon" tabindex="0"></i>
+    </div>
+  </div>
+</nz-footer>
+
+</nz-layout>

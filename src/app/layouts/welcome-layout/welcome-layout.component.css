@@ -1,0 +1,115 @@
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.logo {
+  height: 16px; /* Hauteur ajustée du conteneur du logo */
+  margin-top: 25px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-image {
+  max-height: 100%; /* S'assure que l'image ne dépasse pas la hauteur du conteneur */
+  height: auto;
+  max-width: 80px; /* Largeur maximale de l'image */
+  width: auto;
+}
+
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+
+.welcomelayout {
+  height: 100vh;
+}
+
+.welcome-content {
+  height: calc(100vh - 64px); /* 64px correspond à la hauteur de la barre de navigation */
+}
+
+:focus {
+  outline: 2px solid blue; /* Changez la couleur et l'épaisseur de la bordure selon vos préférences */
+  background-color: #f0f0f0; /* Changez la couleur de fond selon vos préférences */
+  color: #333;
+}
+
+.ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante si nécessaire */
+}
+
+.categories {
+  float: left;
+  font-weight: bolder;
+}
+
+.ant-layout-header-right {
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.btn-search {
+  flex: 1; /* L'élément prend tout l'espace disponible dans le header */
+  margin-right: 25px; /* Marge à droite pour séparer le bouton de recherche du reste du contenu */
+  margin-left: 25px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  height: 40px;
+  width: 200px; /* Ajustez cette largeur comme nécessaire */
+  max-width: 100%; /* S'assure que la largeur ne dépasse pas le conteneur */
+  border-radius: 20px;
+}
+
+.nz-menu-item:focus,
+button:focus {
+  outline: 2px solid blue; /* Adjust the color and thickness as needed */
+  background-color: #f0f0f0; /* Optional: Change background color on focus */
+}
+
+/* Ajout de styles responsifs */
+@media only screen and (max-width: 768px) {
+  .logo {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 100px; /* Ajustez la taille du logo pour les petits écrans */
+    height: 25px;
+  }
+
+  .categories {
+    margin-left: 10px;
+  }
+
+  .ant-layout-header-right {
+    float: none;
+    text-align: center;
+    flex-direction: column; /* Aligne les boutons verticalement */
+    width: 100%;
+  }
+
+  .ant-layout-header-right button {
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+  }
+
+  .ant-dropdown-menu-item {
+    text-align: center;
+  }
+
+  .btn-search {
+    width: 100%; /* Prendre toute la largeur disponible sur les petits écrans */
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

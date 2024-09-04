@@ -1,0 +1,22 @@
+<nz-result
+nzStatus="success"
+nzTitle="{{'Congratulations,'| translate}} {{fullname}}{{'! You\'ve successfully completed the'| translate}} {{title}} {{'course! 🌟 Your dedication and hard work have paid off, and this achievement is a testament to your commitment to learning and growth. Keep embracing challenges and pursuing knowledge, as your journey to success is just beginning! 🚀'| translate}}"
+>
+<div nz-result-extra>
+  <button nz-button nzType="primary" (click)="return()">{{'Return to the course'| translate}}</button>
+  <button nz-button (click)="showModal()">{{'View your results'| translate}}</button>
+</div>
+</nz-result>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Quiz Results" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <div *ngIf="loadingResults">Loading...</div>
+    <div *ngIf="error">{{ error }}</div>
+    <ul *ngIf="!loadingResults && !error">
+      <li *ngFor="let result of quizResults">
+        <strong>{{ result.quizName }}</strong>: 
+        {{ result.score !== null ? result.score + ' (' + result.performance + ')' : result.message }}
+      </li>
+    </ul>
+  </ng-container>
+</nz-modal>

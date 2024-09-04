@@ -1,0 +1,102 @@
+<div class="quiz-container">
+  <nz-card class="quiz-card" [ngClass]="{ 'quiz-card-hidden': quizCompleted }">
+    <div class="header" nz-row nzJustify="space-between">
+      <div class="name" nz-col>
+        <h2>{{ quiz.name }}</h2>
+      </div>
+      <div class="timing" nz-col>
+        <p>{{'Timing:'|translate}} {{ quiz.timing }} {{'minutes'|translate}}</p>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="content">
+      <h2>{{ currentQuestionIndex + 1 }}. {{ questions[currentQuestionIndex]?.question }}</h2>
+      <button class="sound-button" (click)="cancelSpeech()" tabindex="0">
+        <span nz-icon nzType="close-circle" nzTheme="outline"></span>
+      </button>
+      <div nz-row nzJustify="start">
+        <div nz-col nzXs="24" nzSm="12">
+          <div class="option" *ngIf="questions[currentQuestionIndex]?.type === 'true/false'">
+            <button class="sound-button" (click)="speakCurrentQuestion()">
+              <span nz-icon nzType="sound" nzTheme="outline"></span>
+            </button>
+            <nz-radio-group [(ngModel)]="selectedOptions[currentQuestionIndex]" (ngModelChange)="selectAnswer($event)">
+              <label nz-radio nzValue="true">True</label>
+              <label nz-radio nzValue="false">False</label>
+            </nz-radio-group>
+          </div>
+          <div class="option" *ngIf="questions[currentQuestionIndex]?.type === 'single choice'">
+            <button class="sound-button" (click)="speakCurrentQuestion()">
+              <span nz-icon nzType="sound" nzTheme="outline"></span>
+            </button>
+            <nz-radio-group [(ngModel)]="selectedOptions[currentQuestionIndex]" (ngModelChange)="selectAnswer($event)">
+              <label *ngFor="let option of questions[currentQuestionIndex]?.options" nz-radio [nzValue]="option.value">{{ option.label }}</label>
+            </nz-radio-group>
+          </div>
+          <div class="option" *ngIf="questions[currentQuestionIndex]?.type === 'multiple choice'">
+            <button class="sound-button" (click)="speakCurrentQuestion()">
+              <span nz-icon nzType="sound" nzTheme="outline"></span>
+            </button>
+            <nz-checkbox-group [(ngModel)]="selectedOptions[currentQuestionIndex]" (ngModelChange)="selectAnswer($event)">
+              <label *ngFor="let option of questions[currentQuestionIndex]?.options" nz-checkbox [nzValue]="option.value">{{ option.label }}</label>
+            </nz-checkbox-group>
+          </div>
+          <div class="option" *ngIf="questions[currentQuestionIndex]?.type === 'short answer'">
+            <button class="sound-button" (click)="speakCurrentQuestion()">
+              <span nz-icon nzType="sound" nzTheme="outline"></span>
+            </button>
+            <input type="text" [(ngModel)]="selectedOptions[currentQuestionIndex]" (ngModelChange)="selectAnswer($event)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <nz-divider style="margin-top: 120px;"></nz-divider>
+    <div class="footer" nz-row nzJustify="space-between">
+      <div class="nombre-questions">
+        <p>{{ currentQuestionIndex + 1 }} of {{ totalQuestions }} {{'Questions'|translate}}</p>
+      </div>
+      <div class="next-submit-button">
+        <button nz-button nzType="primary" *ngIf="currentQuestionIndex === totalQuestions - 1" (click)="submitQuiz()">{{'Submit'|translate}}</button>
+        <button nz-button nzType="primary" *ngIf="currentQuestionIndex < totalQuestions - 1" (click)="nextQuestion()">{{'Next'|translate}}</button>
+      </div>
+    </div>
+  </nz-card>
+
+  <nz-card class="result-card" *ngIf="quizCompleted">
+    <button class="sound-button" (click)="speakQuizResult()">
+      <span nz-icon nzType="sound" nzTheme="outline"></span>
+    </button>
+    <button class="sound-button" (click)="cancelSpeech()" tabindex="0">
+      <span nz-icon nzType="close-circle" nzTheme="outline"></span>
+    </button>
+    <nz-result [nzIcon]="'smile-twotone'" [nzTitle]="'Great! The quiz is finished. Discover your performance!'">
+      <div nz-result-extra>
+        <div class="result-container" *ngIf="score !== undefined">
+          <p class="result-info">{{'Score:'|translate}} {{ scoreString }}</p>
+          <p class="result-info">{{'Percentage:'|translate}} {{ percentage }}</p>
+          <p class="result-info">{{'Performance:'|translate}} {{ performance }}</p>
+        </div>
+        <div class="correct-answers-container" *ngIf="correctAnswers.length > 0">
+          <button nz-button nzType="primary" (click)="showModal()">{{'Consult Correct Answers' | translate}}</button>
+        </div>
+      </div>
+    </nz-result>
+    <div class="nextTopicQuiz-button-container">
+      <button nz-button nzType="primary" (click)="proceedToNextQuizOrTopic('')">{{'Next Quiz/Topic'| translate}}</button>
+    </div>
+  </nz-card>
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="{{'Consult Correct Answers' | translate}}" nzOkText="Ok" nzCancelText="Cancel" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+    <ng-container *nzModalContent>
+      <ul>
+        <li *ngFor="let answer of correctAnswers">
+          <p [ngClass]="{'correct-answer': answer.isCorrect, 'incorrect-answer': !answer.isCorrect}">
+            {{ answer.question }} - 
+            <strong>{{ answer.learnerAnswer }}</strong> 
+            <span *ngIf="!answer.isCorrect">({{ 'Correct answer:' | translate }} {{ answer.correctAnswer }})</span>
+          </p>
+        </li>
+      </ul>
+    </ng-container>
+  </nz-modal>
+  
+</div>

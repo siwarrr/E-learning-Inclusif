@@ -1,0 +1,6 @@
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px; /* Keep the height of the container as is */
+  }

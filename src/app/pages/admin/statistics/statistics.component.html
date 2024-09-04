@@ -1,0 +1,19 @@
+<nz-progress
+  [nzPercent]="teacherPercentage"
+  nzType="dashboard"
+  nzStrokeWidth="10"
+  nzStrokeColor="#87d068"
+>
+  {{ teacherPercentage }}% 
+</nz-progress>
+<h4 class="TeacherKey">Teachers</h4>
+
+<nz-progress
+  [nzPercent]="studentPercentage"
+  nzType="dashboard"
+  nzStrokeWidth="10"
+  nzStrokeColor="#ffa000"
+>
+  {{ studentPercentage }}% 
+</nz-progress>
+<h4 class="StudentKey">Learners</h4>

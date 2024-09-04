@@ -1,0 +1,53 @@
+<ng-container *ngIf="searchResults">
+    <div *ngIf="searchResults.loading">
+      <!-- Afficher le skeleton loading tant que les données sont en cours de chargement -->
+      <nz-skeleton [nzActive]="true" [nzAvatar]="true" [nzParagraph]="{ rows: 3 }"></nz-skeleton>
+    </div>
+    <div *ngIf="!searchResults.loading">
+      <!-- Afficher un message si aucun cours n'est trouvé -->
+      <div *ngIf="searchResults.courseResults.length === 0" style="background: #ECECEC; padding: 30px;">
+        <strong>{{ 'No courses found for' | translate }} "{{ searchInput }}".</strong>
+      </div>
+      <!-- Afficher les résultats de recherche -->
+      <div *ngIf="searchResults.courseResults.length > 0" style="background: #ECECEC; padding: 30px;">
+        <h2>{{ 'Courses' | translate }}</h2>
+        <nz-row [nzGutter]="16">
+          <nz-col *ngFor="let course of searchResults.courseResults" [nzSpan]="8">
+            <nz-card
+              style="width: 100%; margin-bottom: 20px;"
+              class="custom-card"
+              [nzBordered]="false"
+              [nzCover]="coverTemplate"
+              [nzActions]="[actionTemplate]"
+            >
+              <nz-card-meta
+                [nzTitle]="courseTitleTemplate"
+                nzDescription="{{ course.description }}"
+              ></nz-card-meta>
+              <ng-template #courseTitleTemplate>
+                <a (click)="handleCourseClick(course)">{{ course.title }}</a>
+                <nz-icon *ngIf="isEnrolled(course._id)" nzType="check" style="color: green;"></nz-icon>
+              </ng-template>
+            </nz-card>
+          </nz-col>
+        </nz-row>
+        <!-- Utilisez des sections similaires pour afficher les résultats des autres types de recherche -->
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-template #coverTemplate>
+    <img alt="example" src="assets/Images/logo.png" />
+  </ng-template>
+  
+  <ng-template #actionTemplate>
+    <span nz-icon nzType="star-o"></span>
+    <span nz-icon nzType="like-o"></span>
+    <span nz-icon nzType="message"></span>
+  </ng-template>
+  
+  <!-- Modal pour la participation au cours -->
+  <nz-modal [(nzVisible)]="isModalVisible" nzTitle="{{ modalTitle }}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <p>{{ modalContent }}</p>
+  </nz-modal>
+  

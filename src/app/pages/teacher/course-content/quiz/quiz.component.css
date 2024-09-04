@@ -1,0 +1,116 @@
+.quiz-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ajuster pour permettre l'affichage de tout le contenu */
+  background: linear-gradient(135deg, #f3f3f3, #ededed);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nz-card {
+  width: 100%; /* S'étend à la largeur disponible */
+  max-width: 800px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.header {
+  padding: 10px;
+  background-color: #dce0e4;
+  color: rgb(24, 23, 23);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.name h2, .timing p {
+  margin: 0;
+}
+
+.content {
+  padding: 20px;
+  background: white;
+  flex: 1; /* Prend l'espace restant entre header et footer */
+  overflow-y: auto; /* Ajout du défilement si nécessaire */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.nombre-questions {
+  margin: 0;
+}
+
+.next-submit-button button {
+  margin-left: 10px;
+}
+
+.option {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #d3d3d3; /* Changement de la couleur de la bordure pour être plus doux */
+  border-radius: 5px;
+  background: #f9f9f9; /* Ajout d'un fond léger pour plus de lisibilité */
+}
+
+.sound-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1.2em;
+  vertical-align: middle;
+  transition: color 0.3s;
+}
+
+.sound-button:hover {
+  color: #007bff;
+}
+
+.quiz-card-hidden {
+  display: none;
+}
+
+.result-card {
+  width: 100%;
+  max-width: 800px;
+  min-height: 400px;
+  position: relative;
+}
+
+.result-container {
+  margin-top: 10px; /* Espacement en haut des résultats */
+  text-align: center; /* Alignement du texte au centre */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+.result-info {
+  margin-bottom: 5px; /* Espacement entre les paragraphes */
+}
+.correct-answer {
+  color: green;
+}
+
+.incorrect-answer {
+  color: red;
+}
+
+.nextTopicQuiz-button-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

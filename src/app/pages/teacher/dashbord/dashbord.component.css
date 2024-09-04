@@ -1,0 +1,74 @@
+/* Style général pour la page de dashboard */
+.dashboard-container {
+  padding: 20px; /* Espacement intérieur */
+  background-color: #f0f2f5; /* Couleur de fond */
+}
+
+/* Style des onglets (nz-tabset) */
+nz-tabset {
+  max-height: 800px; /* Hauteur maximale des onglets */
+  min-height: 600px; /* Hauteur minimale des onglets */
+  overflow-y: auto; /* Défilement vertical si nécessaire */
+}
+
+/* Style des titres de section */
+.section-title {
+  font-size: 1.5rem; /* Taille de police */
+  font-weight: bold; /* Gras */
+  margin: 16px 0; /* Marge autour du titre */
+}
+
+/* Style des statistiques (nz-statistic) */
+nz-statistic {
+  font-weight: bold; /* Gras */
+}
+
+/* Style des en-têtes de liste */
+.nz-list-header {
+  font-weight: bold; /* Gras */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police de caractères */
+  background-color: beige; /* Couleur de fond */
+  padding: 12px; /* Espacement intérieur */
+}
+
+/* Style des éléments de liste */
+.nz-list-item {
+  margin-bottom: 12px; /* Marge inférieure entre les éléments */
+}
+
+/* Style des actions des éléments de liste */
+.nz-list-item-actions {
+  margin-left: auto; /* Alignement à droite des actions */
+}
+
+/* Style des boutons d'action */
+nz-list-item-action button {
+  margin-right: 8px; /* Marge à droite des boutons */
+}
+
+/* Style des boutons dans les nz-list-item */
+nz-list-item button {
+  margin-left: 8px; /* Marge à gauche des boutons */
+}
+
+/* Style du message de liste vide */
+.nz-list-empty {
+  padding: 12px; /* Espacement intérieur */
+  text-align: center; /* Centrage du texte */
+  color: #ccc; /* Couleur de texte grise */
+}
+
+/* Style du drawer (tiroir) */
+nz-drawer {
+  width: 80%; /* Largeur du tiroir */
+}
+
+/* Style des titres dans les nz-list-item-meta */
+nz-list-item-meta-title {
+  font-weight: bold; /* Gras */
+}
+
+/* Style des descriptions dans les nz-list-item-meta */
+nz-list-item-meta-description {
+  color: #666; /* Couleur de texte gris foncé */
+}

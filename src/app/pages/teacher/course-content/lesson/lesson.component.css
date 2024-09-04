@@ -1,0 +1,7 @@
+.disable-collapse-animation .ant-collapse-content {
+    transition: none !important;
+  }
+  
+    .tabset-container {
+      margin-top: 20px; /* Ajustez la marge supérieure selon vos besoins */
+    }

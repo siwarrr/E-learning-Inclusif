@@ -1,0 +1,87 @@
+:host {
+    text-align: center;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #F8F8F8;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .chat-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+    align-items: stretch;
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
+  
+  .learner-list {
+    padding: 20px;
+    background: #f3f3f3;
+    border-radius: 8px;
+  }
+  
+  nz-input-group {
+    margin-bottom: 20px;
+  }
+  
+  nz-list {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 170px;
+  }
+  
+  nz-list-item {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  nz-list-item:hover {
+    background: #dbdbf3;
+    color: #333;
+  }
+  
+  .learner-name{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+  }
+  
+  h4 {
+    color: black;
+    font-weight: bolder;
+    text-align: center;
+  }
+  .scrollable-container {
+    max-height: 400px; /* Vous pouvez ajuster cette hauteur selon vos besoins */
+    overflow-y: auto;
+    border: 1px solid #ddd; /* Optionnel: pour montrer la bordure */
+    border-radius: 8px; /* Optionnel: pour arrondir les coins */
+  }
+  .online {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  .unread-messages {
+    font-weight: bold;
+  }

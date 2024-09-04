@@ -1,0 +1,71 @@
+/* Conteneur général pour centrer le formulaire de connexion */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #c295f1, #2575fc); /* Dégradé de fond */
+}
+
+/* Style du formulaire de connexion */
+.login-form {
+  width: 400px;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* L'effet de survol pour ajouter une ombre et une légère élévation */
+.login-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+}
+
+/* Titre du formulaire */
+.login-form h2 {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Styles pour les champs de formulaire */
+.login-form nz-input-group {
+  margin-bottom: 20px;
+}
+
+/* Bouton de connexion */
+.login-form-button {
+  width: 100%;
+  background: #2575fc; /* Couleur de fond pour le bouton */
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Effet de survol pour le bouton */
+.login-form-button:hover {
+  background: #6a11cb;
+  transform: translateY(-2px);
+}
+
+/* Lien de mot de passe oublié */
+.login-form-forgot {
+  float: right;
+  color: #2575fc;
+  transition: color 0.3s ease;
+}
+
+/* Effet de survol pour le lien */
+.login-form-forgot:hover {
+  color: #6a11cb;
+}
+
+/* Centrage du bouton et ajustement du padding */
+.login-form-margin {
+  margin-bottom: 20px;
+}

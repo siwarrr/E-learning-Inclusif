@@ -1,0 +1,107 @@
+:host {
+  display: block;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chatbot-header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  color: white;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-button:hover {
+  color: #ff4b5c;
+}
+
+.chatbot-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+}
+  
+  .chatbot-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    max-width: 300px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .user-message {
+    margin-left: auto;
+    margin-top: 5px;
+    padding: 10px;
+    max-width: 300px;
+    background-color: #d3e0ea; /* Background color for user messages */
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .chatbot-message.left {
+    margin-right: auto;
+    margin-top: 5px;
+    background-color: #ffffff; /* Background color for chatbot messages */
+  }
+  
+  .chatbot-footer {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f5f5f5;
+  }
+
+.chatbot-footer input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+.chatbot-footer input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.chatbot-footer button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chatbot-footer button:hover {
+    background-color: #0056b3;
+}
+
+button:focus,
+input:focus,
+select:focus,
+.nz-menu-item:focus {
+  outline: 2px solid blue; /* Adjust the color and thickness as needed */
+  background-color: #f0f0f0; /* Optional: Change background color on focus */
+}

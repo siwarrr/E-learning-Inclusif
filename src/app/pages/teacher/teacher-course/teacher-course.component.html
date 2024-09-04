@@ -1,0 +1,16 @@
+<div nz-row class="create-course-container">
+  <div nz-col nzFlex="auto">
+    <div class="welcome-message">
+      <h1>{{ 'Welcome,' | translate }} {{ fullname }}</h1>
+      <p>{{ 'to our AllLearn Platform! You can now launch your creative courses. We wish you a successful journey ahead!' | translate }}</p>
+    </div>
+    <nz-card class="create-course-card">
+      <p class="create-course-title">{{ 'Start creating a course' | translate }}</p>
+      <div class="create-course-button">
+        <button nz-button nzType="primary" (click)="navigateToAddCourse()">
+          {{ 'Create your course' | translate }}
+        </button>
+      </div>
+    </nz-card>
+  </div>
+</div>

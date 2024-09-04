@@ -1,0 +1,51 @@
+.modern-course-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modern-course-form .form-actions {
+  margin-top: 24px;
+  text-align: right;
+}
+
+.modern-course-form nz-form-label {
+  font-weight: bold;
+}
+
+.modern-course-form nz-form-control {
+  margin-bottom: 16px;
+}
+
+.modern-course-form button {
+  margin-right: 8px;
+}
+
+.modern-course-form button:last-child {
+  margin-right: 0;
+}
+
+.modern-course-form textarea {
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+  .Publish, .Update {
+    margin-top: 60px;
+    display: inline-block; /* ou display: inline; */
+    flex: auto;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* Keep the height of the container as is */
+}

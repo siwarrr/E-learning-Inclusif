@@ -1,0 +1,312 @@
+<nz-collapse [nzBordered]="false">
+  <nz-collapse-panel *ngFor="let panel of panels" [nzHeader]="panel.name" [nzActive]="panel.active">
+    <button nz-button nzType="primary" (click)="showTopicModal()">
+      <span>{{'add new Topic'| translate}}</span>
+    </button>
+    <nz-modal
+      [(nzVisible)]="isVisibleTopicModal"
+      nzTitle="{{'add new Topic'| translate}}"
+      (nzOnCancel)="hideTopicModal()"
+      (nzOnOk)="createOrUpdateTopic()"
+      [nzOkLoading]="isOkLoading"
+    >
+                          
+      <p *nzModalContent>
+        <nz-form-item>
+          <nz-form-label>{{'Topic Name'| translate}}</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="Basic usage" [(ngModel)]="formData.topicName" name="topicName" type="text" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>{{'Topic summary'| translate}}</nz-form-label>
+          <nz-form-control>
+            <textarea
+            nz-input
+            [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+            [(ngModel)]="formData.topicSummary" name="topicSummary"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </p>
+    </nz-modal>
+    <nz-collapse [nzBordered]="false">
+      <nz-collapse-panel *ngFor="let topic of sectionData.topics" (click)="updateCurrentTopicId(topic._id)" [nzHeader]="topic.name" [nzActive]="true">
+        <!-- Contenu du topic -->
+        <a nz-button nzType="link" (click)="showEditTopicModal(topic._id)">Edit</a>
+        <button nz-button nzType="text" (click)="deleteTopic(topic._id)" nzDanger>Delete</button>
+        <p>{{ topic.summary }}</p>
+
+        <!--<ng-container *ngFor="let topic of courseTopics[courseId]; let i = index">-->
+          <button nz-button [nzSize]="size" nzType="primary" (click)="showLessonModal(topic._id)">{{'add Lesson'| translate}}</button>
+        <nz-modal
+        [(nzVisible)]="isVisibleLessonModal"
+        nzTitle="{{'Add New Lesson'| translate}}"
+        (nzOnCancel)="hideLessonModal()"
+        (nzOnOk)="createLessonForTopic()"              
+        [nzOkLoading]="isOkLoading"
+      >
+        <p *nzModalContent>
+          <nz-form-item>
+            <nz-form-label>{{'Lesson Name'| translate}}</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="{{'Enter lesson name'| translate}}" [(ngModel)]="formData.lessonName" name="lessonName" type="text" />
+            </nz-form-control>
+          </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>{{'Lesson content'| translate}}</nz-form-label>
+        <nz-form-control>
+          <textarea nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }" [(ngModel)]="formData.content" name="content">
+          </textarea>
+        </nz-form-control>
+      </nz-form-item>
+      
+      <nz-form-item>
+        <nz-form-label>{{'Video source'| translate}}</nz-form-label>
+        <nz-form-control>
+            <input nz-input placeholder="{{'Enter video URL'| translate}}" [(ngModel)]="formData.lessonVideo" name="lessonVideo" type="text" />
+        </nz-form-control>
+      </nz-form-item>
+      
+      <nz-form-item>
+        <nz-form-label>{{'Video transcription'| translate}}</nz-form-label>
+        <nz-form-control>
+            <input nz-input placeholder="{{'Enter phrases file'| translate}}" [(ngModel)]="formData.transcription" name="transcription" type="text" />
+        </nz-form-control>
+        <!--<nz-form-control>
+          <input nz-input placeholder="{{'Enter subtitles file'| translate}}" [(ngModel)]="formData.subtitlesFile" name="subtitlesFile" type="text" />
+        </nz-form-control>
+        <nz-form-control>
+          <input nz-input placeholder="{{'Enter timed_phrases file'| translate}}" [(ngModel)]="formData.timed_phrasesFile" name="timed_phrasesFile" type="text" />
+        </nz-form-control>-->
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>{{'Video duration'| translate}}</nz-form-label>
+        <nz-form-control>
+            <input nz-input placeholder="{{'Enter video duration'| translate}}" [(ngModel)]="formData.videoDuration" name="videoDuration" type="number" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>{{'Upload exercise files to the lesson'| translate}}</nz-form-label>
+        <nz-form-control>
+          <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload"
+            [nzAction]="apiUploadUrl + courseId + '/sections/exercises'"
+            lessonExerciseControl  
+            [(ngModel)]="formData.lessonExercise" name="lessonExercise">
+            <button nz-button>
+              <span nz-icon nzType="upload"></span>
+              Upload Attachments
+            </button>
+          </nz-upload>
+        </nz-form-control>
+      </nz-form-item>
+      
+      </p>
+      </nz-modal>
+      <!--</ng-container>-->
+      <ng-container *ngFor="let lesson of topic.lessons">
+        <nz-collapse [nzBordered]="false">
+          <nz-collapse-panel [nzHeader]="lesson.name" [nzActive]="true">
+            <!-- Contenu de la leçon -->
+            <a nz-button nzType="link" (click)="showEditLessonModal(topic._id, lesson)">Edit</a>
+            <button nz-button nzType="text" (click)="deleteLesson(currentTopicId, lesson)" nzDanger>Delete</button>
+            <p>{{ lesson.name }}</p>
+          </nz-collapse-panel>
+        </nz-collapse>
+      </ng-container>
+
+      <!--<ng-container *ngFor="let topic of courseTopics[courseId]; let i = index">-->
+        <button nz-button [nzSize]="size" nzType="default" (click)="showQuizModal(topic._id)">{{'add Quiz'| translate}}</button>
+    <nz-modal
+    [(nzVisible)]="isVisibleQuizModal"
+    nzTitle="{{'Add new Quiz'| translate}}"
+    (nzOnCancel)="hideQuizModal()"
+    (nzOnOk)="createQuizForTopic()"              
+    [nzOkLoading]="isOkLoading"
+    [nzFooter]="modalFooterTemplate"
+    >
+    <p *nzModalContent>
+      <nz-steps [nzCurrent]="current">
+        <nz-step nzTitle="Quiz info"></nz-step>
+        <nz-step nzTitle="Questions"></nz-step>
+        <nz-step nzTitle="{{'Settings'| translate}}"></nz-step>
+      </nz-steps>
+      <nz-row *ngIf="index === 'First-content'">
+        <nz-form-item>
+          <nz-form-label>{{'Quiz Name'| translate}}</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="{{'Enter Quiz name'| translate}}" [(ngModel)]="formData.quizName" name="quizName" type="text" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>{{'Quiz Summary'| translate}}</nz-form-label>
+          <nz-form-control>
+            <textarea nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }" [(ngModel)]="formData.quizSummary" name="quizSummary"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-row>
+  
+      <!-- Autres étapes et contenu de formulaire pour les étapes suivantes -->
+      <nz-row *ngIf="index === 'Second-content'">
+          <div *ngIf="!showQuestionList">
+            <nz-form-item>
+              <nz-form-label>{{'Write your Question'| translate}}</nz-form-label>
+              <nz-form-control>
+                  <input nz-input placeholder="{{'Enter your Question here'| translate}}" [(ngModel)]="formData.questionName" name="questionName" type="text" required />
+                  <!--Ajoutez un message d'erreur si le champ est vide--> 
+                  <div *ngIf="!formData.questionName" class="error-message">{{'Question is required.'| translate}}</div>
+              </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label>{{'Select your Question type'| translate}}</nz-form-label>
+            <nz-form-control>
+                <nz-select [(ngModel)]="selectedQuestionType" 
+                (ngModelChange)="changeQuestionType()" nzAllowClear nzPlaceHolder="{{'Choose question type'| translate}}">
+                  <nz-option nzValue="{{'true/false'| translate}}" nzLabel="True/False"></nz-option>
+                  <nz-option nzValue="{{'single choice'| translate}}" nzLabel="Single Choice"></nz-option>
+                  <nz-option nzValue="{{'multiple choice'| translate}}" nzLabel="Multiple Choice"></nz-option>
+                  <nz-option nzValue="{{'short answer'| translate}}" nzLabel="Short Answer"></nz-option>
+                </nz-select> 
+              </nz-form-control>
+          </nz-form-item>
+          <nz-form-label>{{'Input options for the question and select the correct answer'| translate}}</nz-form-label>
+          
+          <nz-form-item  *ngIf="selectedQuestionType === 'true/false'">
+            <nz-form-control>
+              <p>{{'Please select the correct answer:'| translate}}</p>
+              <nz-radio-group [(ngModel)]="selectedOption">
+                <label nz-radio nzValue="true">{{'True'| translate}}</label>
+                <label nz-radio nzValue="false">{{'False'| translate}}</label>
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item *ngIf="selectedQuestionType === 'single choice'">
+            <input nz-input placeholder="Enter option" [(ngModel)]="additionalOption">
+            <button nz-button nzType="default" (click)="addOption()">{{'Add Option'| translate}}</button>
+            <br><br>
+            <nz-radio-group [(ngModel)]="selectedOption">
+              <label nz-radio *ngFor="let option of options" [nzValue]="option.value">{{ option.label }}</label>
+            </nz-radio-group>
+          </nz-form-item>  
+
+          <nz-form-item *ngIf="selectedQuestionType === 'multiple choice'">
+            <input nz-input placeholder="Enter option" [(ngModel)]="additionalOption">
+            <button nz-button nzType="default" (click)="addOption()">{{'Add Option'| translate}}</button>
+            <br><br>
+            <div *ngFor="let option of options">
+              <label nz-checkbox [(ngModel)]="option.selected">{{ option.label }}</label>
+            </div>
+          </nz-form-item>                     
+            
+            <nz-form-item *ngIf="selectedQuestionType === 'short answer'">
+              <nz-form-control>
+                <input nz-input placeholder="{{'Enter short answer'| translate}}" [(ngModel)]="shortAnswer">
+              </nz-form-control>              
+            </nz-form-item>
+
+          <nz-form-item>
+             <button nz-button nzType="primary" (click)="saveQuestion()" [disabled]="!formData.questionName">{{'add to questions'| translate}}</button>
+            </nz-form-item>
+            </div>
+            <div *ngIf="showQuestionList">
+              <h3>{{'Questions created:'| translate}}</h3>
+              <ul>
+                <li *ngFor="let question of questions">
+                  Question: {{ question.name }} (Type: {{ question.type }})<br>
+                  Options:
+                  <ul>
+                    <!-- Afficher l'option pour les questions de type "true/false" -->
+                    <li *ngIf="question.type === 'true/false'">
+                      {{ question.correctAnswer }}
+                      <!-- Vérifier si l'option est la réponse correcte -->
+                      <span *ngIf="question.correctAnswer === 'true'">(Correct Answer)</span>
+                      <span *ngIf="question.correctAnswer === 'false'">(Correct Answer)</span>
+                    </li>
+                    <!-- Si ce n'est pas une question de type "true/false", afficher toutes les options -->
+                    <ng-container *ngIf="question.type !== 'true/false'">
+                      <li *ngFor="let option of question.options">
+                        {{ option.label }} 
+                        <!-- Vérifier si l'option est la réponse correcte -->
+                        <span *ngIf="question.correctAnswer.includes(option.value)">(Correct Answer)</span>
+                      </li>
+                    </ng-container>
+                    <ng-container *ngIf="selectedQuestionType === 'multiple choice'">
+                      <li *ngFor="let option of options">
+                        <label nz-checkbox [(ngModel)]="option.selected">{{ option.value }}</label>
+                        <span *ngIf="option.selected && isOptionCorrect(option.value)">(Correct Answer)</span>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </li>
+              </ul>
+              <button nz-button nzType="primary" (click)="showQuestionList = false">{{'Add Another Question'| translate}}</button>
+            </div>
+        </nz-row>
+        <nz-row *ngIf="index === 'third-content'">
+          <nz-form-item>
+            <nz-form-label nzRequired>{{'Quiz time (in minutes)'| translate}}</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="number" placeholder="{{'Enter time in minutes'| translate}}" [(ngModel)]="selectedTime"/>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-row>
+     </p>
+     <ng-template #modalFooterTemplate>
+      <div>
+        <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+          <span>{{'Previous'| translate}}</span>
+        </button>
+        <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+          <span>{{'Next'| translate}}</span>
+        </button>
+        <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
+          <span>{{'Done'| translate}}</span>
+        </button>
+      </div>
+    </ng-template>
+    </nz-modal>
+    <!--</ng-container>-->
+
+    <ng-container *ngFor="let quiz of topic.quizzes">
+        <nz-collapse [nzBordered]="false">
+          <nz-collapse-panel [nzHeader]="quiz.name" [nzActive]="true">
+          <!-- Affichez la description du quiz -->
+          <a nz-button nzType="link" (click)="showEditQuizModal(topic._id, quiz)">Edit</a>
+          <button nz-button nzType="text" (click)="deleteQuiz(currentTopicId, quiz)" nzDanger>Delete</button>
+          <p>{{ quiz.summary }}</p>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </ng-container>
+        
+   </nz-collapse-panel>
+  </nz-collapse>
+  </nz-collapse-panel>
+  <div>
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button [nzSize]="size" nzType="primary" (click)="saveSecondSection()">{{'save'| translate}}</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</nz-collapse>
+
+
+<!--
+  <nz-upload
+          #uploadLessonVideo
+          [nzAction]="apiUploadUrl + courseId + '/sections/video'"
+          [nzFileList]="videoFile"
+          (nzChange)="handleChange($event)"
+          [nzAccept]="'video/*'"
+          lessonVideoControl
+          [(ngModel)]="formData.lessonVideo"
+          name="lessonVideo">
+          <button nz-button>
+            <i nz-icon nzType="upload"></i> Click to Upload Video
+          </button>
+        </nz-upload>
+ -->

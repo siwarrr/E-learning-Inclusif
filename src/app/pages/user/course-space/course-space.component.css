@@ -1,0 +1,159 @@
+p {
+  margin: 0;
+}
+
+.course-space-container {
+  padding: 20px;
+  width: 100%;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 10px;   
+}
+
+.heading {
+  margin-top: 25px;
+  color: #333;
+  font-size: 2rem;
+}
+
+.intro-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.course-list {
+  margin-top: 20px;
+}
+
+.course-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  margin-bottom: 16px;
+  background: white;
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.course-card:hover {
+  transform: scale(1.05);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+}
+.course-description {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.course-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* Keep the height of the container as is */
+}
+.course-image {
+  max-width: 80px; /* Adjust this value to make the image smaller */
+  max-height: 80px; /* Adjust this value to make the image smaller */
+  object-fit: contain;
+}
+.chatbot-wrapper {
+  position: fixed; /* Position fixe pour toujours rester visible */
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+}
+.chatbot-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.chatbot-button span[nz-icon] {
+  margin-right: 8px;
+}
+
+.chatbot-button:hover {
+  background-color: #40a9ff;
+}
+.chatbot-container {
+  width: 500px;
+  height: 450px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 5px; /* Espace entre le chatbot et le bouton */
+  margin-right: 50px;
+}
+
+.accessibility-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 1001;
+}
+
+.accessibility-controls button {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  border-radius: 50%;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.accessibility-controls button:hover {
+  background-color: #40a9ff;
+}
+
+button:focus,
+input:focus,
+select:focus,
+.nz-card:focus,
+.nz-list:focus,
+h2:focus,
+div:focus {
+  outline: 2px solid blue; /* Adjust the color and thickness as needed */
+  background-color: #f0f0f0; /* Optional: Change background color on focus */
+}

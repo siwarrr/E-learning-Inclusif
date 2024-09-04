@@ -1,0 +1,58 @@
+.create-course-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  background: url('/assets/Images/laptop.jpg') no-repeat center center;
+  background-size: cover; /* Ajouté pour couvrir toute la zone disponible */
+  padding: 20px;
+}
+
+.welcome-message {
+  text-align: center;
+  margin-bottom: 40px; /* Espacement inférieur */
+}
+
+.welcome-message h1 {
+  font-size: 2.3rem; /* Taille de police du titre principal */
+  font-weight: bold; /* Gras */
+  margin-bottom: 15px; /* Marge inférieure */
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Pour améliorer la lisibilité du texte */
+  padding: 10px; /* Diminuer le padding pour réduire la taille de fond */
+  background: rgba(87, 86, 86, 0.5); /* Fond semi-transparent pour améliorer la lisibilité */
+  border-radius: 8px;
+}
+
+.welcome-message p {
+  font-size: 1.5rem; /* Taille de police du paragraphe */
+  line-height: 1.6; /* Espacement des lignes */
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Pour améliorer la lisibilité du texte */
+  font-weight: bold;
+  margin-bottom: 10px; /* Espacement entre les spans */
+  padding: 10px; /* Diminuer le padding pour réduire la taille de fond */
+  background: rgba(87, 86, 86, 0.5); /* Fond semi-transparent pour améliorer la lisibilité */
+  border-radius: 8px;
+}
+
+
+.create-course-card {
+  width: 100%; /* Largeur de la carte */
+  border: 1px solid #ddd; /* Bordure */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  padding: 24px; /* Espacement intérieur */
+  background-color: #fff; /* Fond de la carte */
+}
+
+.create-course-title {
+  font-size: 1.5rem; /* Taille de la police du titre */
+  font-weight: bold; /* Gras */
+  margin-bottom: 16px; /* Marge inférieure */
+}
+
+.create-course-button button:hover {
+  transform: translateY(-2px); /* Effet de levitation au survol */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+}

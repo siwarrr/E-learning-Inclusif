@@ -1,0 +1,170 @@
+<div class="accessibility-controls" *ngIf="isZoomControlsVisible">
+  <button nz-button (click)="zoomIn()">{{'Zoom In'|translate}}</button>
+  <button nz-button (click)="zoomOut()">{{'Zoom Out'|translate}}</button>
+  <button nz-button (click)="resetZoom()">{{'Reset Zoom'|translate}}</button>
+</div>
+
+<div tabindex="0" nz-row *ngIf="courseDetails" class="content-wrapper" [ngStyle]="{'transform': 'scale(' + zoomLevel + ')'}">
+  <div nz-col nzFlex="1 1 200px">
+    <div class="video-container" tabindex="0">
+      <app-lesson [videoUrl]="currentVideoUrl"></app-lesson>
+    </div>
+  </div>
+
+  <div nz-col nzFlex="0 1 300px" class="sections-container">
+    <div tabindex="0">
+      <strong>{{'Your progress :'| translate}}</strong>
+      <ng-container *ngIf="progressPercentage === 100; else notDone">
+        <nz-progress [nzPercent]="progressPercentage" nzType="circle" [nzFormat]="formatTwo"></nz-progress>
+      </ng-container>
+      <ng-template #notDone>
+        <nz-progress [nzPercent]="progressPercentage" nzType="circle" [nzFormat]="formatOne"></nz-progress>
+      </ng-template>
+    </div>    
+       
+    <nz-collapse *ngIf="sections?.length" tabindex="0">
+      <nz-collapse-panel *ngFor="let section of sections" [nzHeader]="section.name" tabindex="0" class="sections-title" [nzActive]="true">
+        <div class="section-content">
+          <div class="lessons-container">
+            <h4 tabindex="0">{{ 'Lessons :' | translate }}</h4>
+            <nz-collapse *ngIf="section.lessons && section.lessons.length > 0">
+              <nz-collapse-panel tabindex="0" *ngFor="let lesson of section.lessons" (click)="selectLesson(lesson._id, section._id, lesson.transcription)"
+                [nzHeader]="lesson.name" [nzActive]="true"
+                class="lessons-title">
+                <p tabindex="0">{{ lesson.content }}</p>
+                <span nz-icon nzType="file-text" nzTheme="outline" *ngIf="selectedLessonTranscription" (click)="showTranscription(lesson._id)"></span>
+                <h4 tabindex="0">{{'Transcription:'| translate}}</h4>
+                <button (click)="speakResponse(lesson.transcription)">
+                  <span nz-icon nzType="sound" nzTheme="outline"></span>
+                </button>
+                <button (click)="pauseResponse()">
+                  <span nz-icon nzType="pause" nzTheme="outline"></span>
+              </button>
+              <button (click)="resumeResponse()">
+                  <span nz-icon nzType="caret-right" nzTheme="outline"></span>
+              </button>
+              <button (click)="cancelResponse()" >
+                  <span nz-icon nzType="close" nzTheme="outline"></span>
+              </button>
+                <p>{{ lesson.transcription }}</p>
+              </nz-collapse-panel>
+            </nz-collapse>
+          </div>
+                
+          <div class="quizzes-container">
+            <h4 tabindex="0">{{'Quizzes :'|translate}}</h4>
+            <nz-collapse *ngIf="section.quizzes && section.quizzes.length > 0">
+              <nz-collapse-panel *ngFor="let quiz of section.quizzes"
+                [nzHeader]="quiz.name" tabindex="0" [nzActive]="true">
+                <p tabindex="0">{{ quiz.summary }}</p>
+                <a tabindex="0" (click)="onStartQuiz(section._id, quiz._id)">{{ 'Start Quiz' | translate }}</a>
+                <span *ngIf="quizScores" nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></span>
+              </nz-collapse-panel>
+            </nz-collapse>
+          </div>
+        </div>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </div>
+
+  <nz-tabset nzCentered tabindex="0" class="tabset-container" *ngIf="courseDetails">
+    <nz-tab tabindex="0" nzTitle="{{ 'About the course' | translate }}">
+      <div class="tab-content">
+        <h2 tabindex="0">{{ courseDetails.title }}</h2>
+        <p tabindex="0">{{ courseDetails.description }}</p>
+        <p><strong>{{'Enseignant:'|translate}}</strong> {{ teacherName }}</p>
+      </div>
+    </nz-tab>
+    <nz-tab tabindex="0" nzTitle="Q & R">
+      <div class="tab-content">
+        <h3 tabindex="0">{{ 'Ask a question:' | translate }}</h3>
+        <textarea tabindex="0" class="question" rows="4" nz-input [(ngModel)]="newCommentText" placeholder="Add a question"></textarea>
+        <button tabindex="0" nz-button (click)="addComment()">{{ 'Add' | translate }}</button>
+        <div *ngIf="comments && comments.length > 0">
+          <ng-container *ngFor="let comment of comments">
+            <ng-template tabindex="0" [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: comment }"></ng-template>
+          </ng-container>
+        </div>
+      </div>
+    </nz-tab>
+           
+    <nz-tab tabindex="0" nzTitle="{{ 'Reviews' | translate }}">
+      <div class="tab-content">
+        <div class="reviews-content">
+          <nz-rate tabindex="0" [(ngModel)]="newRating.stars" [nzTooltips]="tooltips" style="margin-bottom: 20px;"></nz-rate>
+          <span tabindex="0" *ngIf="newRating.stars" class="ant-rate-text">{{ tooltips[newRating.stars - 1] }}</span>
+          <button tabIndex="0" nz-button (click)="addReview(courseId)" style="margin-bottom: 20px;">{{'Add' | translate}}</button>
+          
+          <!--<h4 style="color: blue; text-align: center;">{{ 'Total Stars:' | translate }} {{ totalStars }}</h4>
+          <h4 style="color: blue; text-align: center;">{{ 'Average Rating:' | translate }} {{ averageRating }}</h4>-->
+        
+          <div class="reviews-details">
+            <div *ngFor="let avis of courseDetails.avis">
+              <p tabindex="0" *ngIf="avis.user">
+                <strong>{{ avis.user.fullname }}</strong>: {{ avis.stars }} {{ 'stars' | translate }} - {{ avis.tooltip }}
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!--<h3 style="color: blue;">{{'Star Ratings'|translate}}</h3>
+        <nz-progress  [nzPercent]="30" [nzStatus]="'active'" nzStrokeColor="#1890ff">
+        </nz-progress>            
+        <nz-progress  [nzPercent]="50" [nzStatus]="'active'" nzStrokeColor="#1890ff">
+        </nz-progress>
+        <nz-progress  [nzPercent]="40" [nzStatus]="'active'" nzStrokeColor="#1890ff">
+        </nz-progress>
+        <nz-progress  [nzPercent]="30" [nzStatus]="'active'" nzStrokeColor="#1890ff">
+        </nz-progress>
+        <nz-progress  [nzPercent]="20" [nzStatus]="'active'" nzStrokeColor="#1890ff">
+        </nz-progress>-->
+      </div>
+    </nz-tab>      
+  </nz-tabset>
+  
+</div>
+
+<ng-template tabindex="0" #commentTemplateRef let-comment="comment">
+  <nz-comment tabindex="0" *ngIf="comment.writer" [nzAuthor]="comment.writer.fullname">
+    <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+    <nz-comment-content>
+      <button nz-button nzType="text" (click)="speakResponse(comment.text)">
+        <span nz-icon nzType="sound" nzTheme="outline"></span>
+      </button>
+      <p tabindex="0" class="comment-text">{{ comment.text }}</p>
+    </nz-comment-content>
+    <nz-comment-action>
+      <span tabindex="0" nz-tooltip nzTitle="Like" nz-icon nzType="like" [nzTheme]="comment.likes > 0 ? 'twotone' : 'outline'" (click)="likeComment(comment)"></span>
+      <span class="count like">{{ comment.likes }}</span>
+    </nz-comment-action>
+    <nz-comment-action>
+      <span tabindex="0" nz-tooltip nzTitle="Dislike" nz-icon nzType="dislike" [nzTheme]="comment.dislikes > 0 ? 'twotone' : 'outline'" (click)="dislikeComment(comment)"></span>
+      <span class="count dislike">{{ comment.dislikes }}</span>
+    </nz-comment-action>
+    <nz-comment-action>
+      <a nz-button tabindex="0" class="reply-button" [nzSize]="size" nzType="text" (click)="setReplyCommentId(comment._id)"> {{ 'Reply to' | translate }}</a>
+    </nz-comment-action>
+
+    <div tabindex="0" *ngIf="selectedCommentId === comment._id" style="margin-left: 40px;">
+      <nz-comment tabindex="0">
+        <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+        <nz-comment-content>
+          <nz-form-item>
+            <textarea tabindex="0" [(ngModel)]="replyText" nz-input rows="4" placeholder="Reply to this comment"></textarea>
+          </nz-form-item>
+          <nz-form-item>
+            <button tabindex="0" nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!replyText" (click)="replyToComment(comment._id)">
+              {{ 'Reply' | translate }}
+            </button>
+          </nz-form-item>
+        </nz-comment-content>
+      </nz-comment>
+    </div>
+
+    <div tabindex="0" *ngIf="comment.replies && comment.replies.length > 0" style="margin-left: 40px;">
+      <ng-container tabindex="0" *ngFor="let reply of comment.replies">
+        <ng-template tabindex="0" [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: reply }"></ng-template>
+      </ng-container>
+    </div>
+  </nz-comment>
+</ng-template>

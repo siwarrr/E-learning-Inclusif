@@ -1,0 +1,75 @@
+<div class="accessibility-controls">
+  <button nz-button (click)="zoomIn()">{{'Zoom In'|translate}}</button>
+  <button nz-button (click)="zoomOut()">{{'Zoom Out'|translate}}</button>
+  <button nz-button (click)="resetZoom()">{{'Reset Zoom'|translate}}</button>
+</div>
+
+<div class="signup-container" [ngStyle]="{'transform': 'scale(' + zoomLevel + ')'}">
+  <div class="left-panel">
+    <h2>{{'Welcome Back!'|translate}}</h2>
+    <p>{{'To keep connected with us please login with your personal info'|translate}}</p>
+    <button nz-button nzType="default" routerLink="/welcome/login">{{'Already have an account? Log in'|translate}}</button>
+  </div>
+  <div class="right-panel">
+    <h2>{{'Sign up'|translate}}</h2>
+    <form nz-form [nzAutoTips]="autoTips" [formGroup]="validateForm" class="signup-form" (ngSubmit)="submitForm()">
+      <div class="signup-logo">
+        <img nz-image src="assets/Images/add-user.png" alt="signup" />
+      </div>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>{{ 'Fullname' | translate }}</nz-form-label>
+        <nz-form-control [nzOffset]="2" [nzSpan]="12" nzValidatingTip="Validating...">
+          <input nz-input formControlName="fullname" placeholder="{{ 'Fullname' | translate }}" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>{{'E-mail'| translate}}</nz-form-label>
+        <nz-form-control [nzOffset]="2" [nzSpan]="12">
+          <input nz-input formControlName="email" placeholder="Email" type="email" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>{{ 'Register as' | translate }}</nz-form-label>
+        <nz-form-control [nzOffset]="2" [nzSpan]="12">
+          <nz-radio-group [(ngModel)]="radioValue" formControlName="radioValue">
+            <label nz-radio nzValue="Learner">{{ 'Learner' | translate }}</label>
+            <label nz-radio nzValue="Teacher">{{ 'Teacher' | translate }}</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="8" nzRequired>{{ 'Specific Need' | translate }}</nz-form-label>
+        <nz-form-control [nzOffset]="1" [nzSpan]="15">
+            <nz-select
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="{{ 'Select your type of special need' | translate }}"
+                [(ngModel)]="validateForm.controls.handicapType.value"
+                formControlName="handicapType"
+            >
+            <nz-option nzLabel="{{ 'None' | translate }}" nzValue="none"></nz-option>
+            <nz-option nzLabel="{{ 'Visual impairment' | translate }}" nzValue="visual"></nz-option>
+            <nz-option nzLabel="{{ 'Hearing impairment' | translate }}" nzValue="hearing"></nz-option>
+            <nz-option nzLabel="{{ 'Cognitive impairment' | translate }}" nzValue="cognitive"></nz-option>
+            <nz-option nzLabel="{{ 'Motor impairment' | translate }}" nzValue="motor"></nz-option>
+            <nz-option nzLabel="{{ 'Other' | translate }}" nzValue="other"></nz-option>
+            </nz-select>
+        </nz-form-control>
+      </nz-form-item>    
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>{{ 'Password' | translate }}</nz-form-label>
+        <nz-form-control [nzOffset]="2" [nzSpan]="12" nzDisableAutoTips nzErrorTip="Please input your password!">
+          <input nz-input formControlName="password" placeholder="{{ 'Password' | translate }}" type="password" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>{{ 'Confirm Password' | translate }}</nz-form-label>
+        <nz-form-control [nzOffset]="2" [nzSpan]="12">
+          <input nz-input formControlName="confirm" placeholder="{{ 'Confirm Password' | translate }}" type="password" />
+        </nz-form-control>
+      </nz-form-item>
+          <button class="signup-form-button signup-form-margin" nz-button nzType="primary" (click)="register()">{{ 'Register' | translate }}</button>
+          <a routerLink="/welcome/login">{{ 'Login now!' | translate }}</a>
+    </form>
+  </div>
+</div>

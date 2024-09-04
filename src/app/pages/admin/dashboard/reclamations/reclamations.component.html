@@ -1,0 +1,27 @@
+<nz-list>
+  <ng-container *ngFor="let reclam of reclamations">
+    <nz-list-item>
+      <nz-list-item-meta
+        nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        [nzDescription]="reclam.message"
+      >
+        <nz-list-item-meta-title>
+          <a>{{ reclam.fullname }}</a>
+        </nz-list-item-meta-title>
+      </nz-list-item-meta>
+      {{ reclam.date | date: 'medium' }}
+
+      <ul nz-list-item-actions>
+        <!--<nz-list-item-action><a (click)="toggleReplying(reclam)">Reply</a></nz-list-item-action>-->
+        <nz-list-item-action>Disability Type : {{ reclam.handicapType }}</nz-list-item-action>
+        <!--<nz-list-item-action *ngIf="reclam.replying">
+          <textarea nz-input [(ngModel)]="responseText" (keyup.enter)="replay(reclam._id)"></textarea>
+          <button nz-button nzType="primary" (click)="replay(reclam._id)">Send</button>
+        </nz-list-item-action>-->
+      </ul>        
+
+    </nz-list-item>
+  </ng-container>
+</nz-list>
+
+  

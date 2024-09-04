@@ -1,0 +1,136 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.left-panel, .right-panel {
+  flex: 1;
+  max-width: 40%; /* Réduit la largeur des panneaux */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Laisser l'auto-ajustement de la hauteur */
+  box-sizing: border-box;
+}
+
+.left-panel {
+  background: linear-gradient(135deg, #1e90ff, #87cefa);
+  color: white;
+  border-radius: 10px 0 0 10px;
+  text-align: center;
+  border: 2px solid #1e90ff;
+}
+
+.right-panel {
+  background: white;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #1e90ff;
+}
+
+.left-panel h2, .right-panel h2 {
+  margin-bottom: 15px; /* Réduit la marge sous le titre */
+  font-size: 1.8rem; /* Ajuste la taille de la police pour un titre plus compact */
+}
+
+.left-panel p, .right-panel p {
+  margin-bottom: 20px; /* Réduit la marge sous le texte */
+  font-size: 1.1rem; /* Ajuste la taille de la police pour un texte plus compact */
+}
+
+.left-panel button {
+  background: white;
+  color: #1e90ff;
+  border: none;
+  border-radius: 4px;
+  transition: background 0.3s;
+  font-weight: bolder;
+}
+
+.left-panel button:hover {
+  background: #f0f8ff;
+}
+
+.signup-form {
+  width: 100%;
+}
+
+.signup-logo {
+  margin-bottom: 15px; /* Réduit la marge sous le logo */
+}
+
+.signup-logo img {
+  width: 70px;  /* Réduit la taille du logo */
+  height: 70px; /* Réduit la taille du logo */
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form nz-form-item {
+  margin-bottom: 16px;
+}
+.signup-form nz-form-label {
+font-weight: bolder;
+}
+.signup-form a {
+  display: block;
+  text-align: center;
+  color: #1890ff;
+  transition: color 0.3s;
+}
+
+.signup-form a:hover {
+  color: #40a9ff;
+}
+
+.signup-form button[nz-button] {
+  width: 100%;
+  background: #1890ff;
+  border: none;
+  color: white;
+  transition: background 0.3s;
+  margin-bottom: 20px;
+  font-weight: bolder;
+}
+
+.signup-form button[nz-button]:hover {
+  background: #40a9ff;
+}
+
+.accessibility-controls {
+  position: fixed;
+  top: 50px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.accessibility-controls button {
+  margin: 5px 0;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.accessibility-controls button:hover {
+  background-color: #0056b3;
+}
+
+button:focus,
+a:focus {
+  outline: 2px solid blue; /* Ajustez la couleur et l'épaisseur selon le design */
+  background-color: #f0f0f0; /* Couleur de fond optionnelle lors du focus */
+}

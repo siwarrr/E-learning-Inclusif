@@ -1,0 +1,44 @@
+<div nz-row nzJustify="center" nzAlign="middle" class="course-space-container">
+  <div nz-col nzSpan="16">
+    <h2 tabindex="0" class="heading">{{ 'Let\'s start our learning!' | translate }} <strong>{{ fullname }}</strong></h2>
+
+    <p class="intro-text">
+      {{ 'Welcome' | translate }} <strong>{{ fullname ? fullname : '' }}</strong> {{ 'to our' | translate }} <ng-container *ngIf="courseSpaceTitle">{{ courseSpaceTitle | translate }}</ng-container>
+      {{ '! Here, you\'ll find a wealth of resources and learning materials tailored to help you achieve your educational goals. Whether you\'re exploring new subjects, honing your skills, or preparing for exams, our platform is designed to support your learning journey every step of the way. Dive into our courses, engage with our interactive content, and connect with fellow learners to enhance your understanding and expand your horizons. Get ready to embark on an exciting learning adventure!' | translate }}
+    </p>
+
+    <div *ngIf="courses.length > 0; else coursesNotFound" nz-row nzJustify="center" nzGutter="16" class="course-list">
+      <div *ngFor="let course of courses" nz-col nzSpan="8">
+        <nz-card class="course-card" nzTitle="{{ (course.title | translate) | slice:0:100 }}" [nzExtra]="extraTemplate">
+          <div class="card-content">
+             <div class="image-container">
+            <img *ngIf="course.imageUrl" [src]="course.imageUrl" alt="{{ course.title }}" class="course-image" />
+             </div>
+            <div class="course-description">{{ course.description | slice:0:100 }}</div>
+          </div>
+        </nz-card>
+        <ng-template #extraTemplate>
+          <button nz-button nzType="primary" *ngIf="!isEnrolled(course._id)" (click)="showConfirm(course._id)">{{ 'Participate' | translate }}</button>
+          <button nz-button nzType="default" *ngIf="isEnrolled(course._id)" (click)="visitCourse(course._id)">{{ 'Access' | translate }}</button>
+        </ng-template>
+      </div>
+    </div>
+
+    <ng-template #coursesNotFound>
+      <h2 style="text-align: center; color: #777;">{{ 'No courses found' | translate }}</h2>
+    </ng-template>
+
+    <div class="chatbot-wrapper" tabindex="0">
+      <button nz-button nz-popover nzType="primary" class="chatbot-button"
+      [nzPopoverTitle]="chatbotPopoverTitle" nzPopoverTrigger="hover"
+      (click)="toggleChatbot()" tabindex="0" (keydown.enter)="toggleChatbot()" (keydown.space)="toggleChatbot()">
+      <span nz-icon nzType="wechat" nzTheme="outline"></span> 
+      {{'Chat with Us'|translate}}
+    </button>
+  
+    <div *ngIf="isChatbotOpen" class="chatbot-container" tabindex="0">
+      <app-chatbot (chatbotClosed)="toggleChatbot()" tabindex="0" (keydown.enter)="toggleChatbot()"></app-chatbot>
+    </div>
+    </div>
+  </div>
+</div>

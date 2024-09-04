@@ -1,0 +1,23 @@
+<div class="chat-container">
+  <div class="teacher-list" tabindex="0">
+    <div>
+      <nz-input-group>
+        <h4 tabindex="0">{{'Teachers list :'| translate}} </h4>
+      </nz-input-group>
+    </div>
+    <div class="scrollable-container">
+      <nz-list nzBordered nzSize="small" tabindex="0">
+        <nz-list-item *ngFor="let teacher of teachers" (click)="openChatRoomWithTeacher(teacher._id)" tabindex="0" (keydown.enter)="openChatRoomWithTeacher(teacher._id)">
+          <span class="teacher-name" tabindex="0" [ngClass]="{'unread-messages': hasUnreadMessages(teacher._id)}">
+            {{ teacher.fullname }}
+          </span>
+          <span [ngClass]="{'online': isUserOnline(teacher._id)}"></span>
+          <nz-badge [nzCount]="getUnreadMessageCountForTeacher(teacher._id)">
+            <i nz-icon nzType="mail" nzTheme="outline"></i>
+          </nz-badge>
+        </nz-list-item>
+      </nz-list>
+    </div>
+  </div>
+  <app-chat tabindex="0"></app-chat>
+</div>

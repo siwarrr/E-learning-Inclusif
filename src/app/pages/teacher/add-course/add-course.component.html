@@ -1,0 +1,72 @@
+<form nz-form [formGroup]="courseForm" class="modern-course-form">
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label>{{ 'Course Title' | translate }}</nz-form-label>
+        <nz-form-control>
+          <input nz-input placeholder="{{ 'Please enter course title' | translate }}" formControlName="title" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label>{{ 'Course Space' | translate }}</nz-form-label>
+        <nz-form-control>
+          <nz-select nzPlaceHolder="{{ 'Please select a course space' | translate }}" formControlName="courseSpace">
+            <nz-option nzLabel="{{ 'Primary space' | translate }}" nzValue="Primary space"></nz-option>
+            <nz-option nzLabel="{{ 'High school space' | translate }}" nzValue="High school space"></nz-option>
+            <nz-option nzLabel="{{ 'University space' | translate }}" nzValue="University space"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>{{'Description'|translate}}</nz-form-label>
+        <nz-form-control>
+          <textarea nz-input placeholder="Please enter course description" [nzAutosize]="{ minRows: 4, maxRows: 4 }" formControlName="description"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>{{ 'Image URL' | translate }}</nz-form-label>
+        <nz-form-control>
+          <input nz-input placeholder="{{ 'Please enter image URL' | translate }}" formControlName="imageUrl" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- Displaying the Image -->
+  <div class="image-container" nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24">
+      <img *ngIf="courseForm.get('imageUrl')?.value" [src]="courseForm.get('imageUrl')?.value" alt="Course Image" style="max-width: 100%; height: auto;" />
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" (click)="save()">{{ 'Save' | translate }}</button>
+          <button nz-button nzType="default" (click)="publishCourse(courseForm.value)">{{ 'Publish' | translate }}</button>
+          <button nz-button nzType="default" (click)="updateCourse(courseId, courseForm.value)">{{ 'Update' | translate }}</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+
+
+    <!--<div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="24">
+        <app-course-section [courseId]="courseId" [sectionData]="sectionData" (sectionDataChange)="onSectionDataChange($event)" [topicsList]="topics"></app-course-section>
+      </div>
+    </div>-->

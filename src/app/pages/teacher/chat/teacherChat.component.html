@@ -1,0 +1,68 @@
+<div class="chat-container">
+  <div class="learner-list">
+    <div>
+      <nz-input-group>
+        <h4>{{'Learners list :'| translate}} </h4>
+      </nz-input-group>
+    </div>
+    <div class="scrollable-container">
+      <nz-list nzBordered nzSize="small">
+        <nz-list-item *ngFor="let student of students" (click)="openChatRoomWithStudent(student._id)">
+          <span class="learner-name" [ngClass]="{'unread-messages': hasUnreadMessages(student._id)}">
+            {{ student.fullname }}
+          </span>
+          <span [ngClass]="{'online': isUserOnline(student._id)}"></span>
+          <nz-badge [nzCount]="getUnreadMessageCountForStudent(student._id)">
+            <i nz-icon nzType="mail" nzTheme="outline"></i>
+          </nz-badge>
+        </nz-list-item>
+      </nz-list>
+    </div>
+  </div>
+  <!--Chat Window-->
+  <app-chat></app-chat>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<div>
+  <nz-input-group [nzSuffix]="suffixIconSearch">
+    <input type="text" nz-input placeholder="username" />
+  </nz-input-group>
+  <ng-template #suffixIconSearch>
+    <span nz-icon nzType="search"></span>
+  </ng-template>
+</div>
+<div>
+  <nz-list nzBordered nzSize="small">
+    <nz-list-item *ngFor="let student of students" (click)="openChatRoom(student._id)">
+      {{ student.fullname }}
+  </nz-list-item>
+  </nz-list>
+</div>
+<section class="chat__section">
+  <div class="brand">
+    <span nz-icon nzType="message" nzTheme="outline"></span>          
+    <h1>chat</h1>
+  </div>
+  <div class="message__area" (click)="getMessages()"> 
+  </div>      
+  <div>
+    <textarea nz-input id="textarea" cols="30" rows="1" placeholder="Write a message..."
+    [(ngModel)]="messageText" (keydown.enter)="sendMessage()">
+</textarea>
+
+  </div>
+</section>-->

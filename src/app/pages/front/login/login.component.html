@@ -1,0 +1,52 @@
+<div class="accessibility-controls">
+  <button nz-button (click)="zoomIn()">{{'Zoom In'|translate}}</button>
+  <button nz-button (click)="zoomOut()">{{'Zoom Out'|translate}}</button>
+  <button nz-button (click)="resetZoom()">{{'Reset Zoom'|translate}}</button>
+</div>
+<div class="login-container" [ngStyle]="{'transform': 'scale(' + zoomLevel + ')'}">
+  <div class="left-panel">
+    <h2>{{'Sign in'|translate}}</h2>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <div class="login-logo">
+        <img nz-image src="assets/Images/user.png" alt="Login" />
+      </div>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="{{'Please input your email!'| translate}}">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="email" placeholder="{{'Email'| translate}}" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="{{'Please input your Password!'| translate}}">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="{{'Password'| translate}}" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <div nz-row class="login-form-margin">
+        <div nz-col [nzSpan]="12">
+          <a class="login-form-forgot" (click)="forgotPassword()" tabindex="0">{{'Forgot password'|translate}}</a>
+        </div>
+      </div>
+      <nz-alert *ngIf="showAlert" nzType="error" [nzMessage]="errorMessage"></nz-alert>
+      <div *ngIf="showResetPasswordForm">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="{{'Please input your new password!'| translate}}">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" nz-input formControlName="newPassword" tabindex="0" placeholder="{{'New password'|translate}}" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <button nz-button class="login-form-button login-form-margin" nzType="primary" tabIndex="0" (click)="resetPassword()">{{'Reset Password'|translate}}</button>
+      </div>
+      <button nz-button class="login-form-button login-form-margin" nzType="primary" (click)="login()">{{'Login'| translate}}</button>
+      {{'Or'|translate}} <a routerLink="/welcome/register">{{'register now!'| translate}}</a>
+    </form>
+  </div>
+  <div class="right-panel">
+    <h2>{{'Welcome!'|translate}}</h2>
+    <p>{{'Enter your personal details and start journey with us'|translate}}</p>
+    <button nz-button nzType="link" routerLink="/welcome/register">{{'Don\'t have an account? Sign up'|translate}}</button>
+  </div>
+</div>

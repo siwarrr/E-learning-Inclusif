@@ -1,0 +1,112 @@
+.userLayout {
+  height: 100vh;
+}
+
+.user-content {
+  height: calc(100vh - 64px); /* 64px correspond à la hauteur de la barre de navigation */
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  height: 16px; /* Hauteur ajustée du conteneur du logo */
+  margin-top: 25px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-image {
+  max-height: 100%; /* S'assure que l'image ne dépasse pas la hauteur du conteneur */
+  height: auto;
+  max-width: 80px; /* Largeur maximale de l'image */
+  width: auto;
+}
+
+.nav-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  font-weight: bolder;
+}
+
+.btn-search {
+  flex: 1; /* L'élément prend tout l'espace disponible dans le header */
+  margin-right: 25px; /* Marge à droite pour séparer le bouton de recherche du reste du contenu */
+  margin-left: 25px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  height: 40px;
+  width: 200px;
+  border-radius: 20px;
+}
+.ant-layout-header-right a {
+  font-weight: bold; /* Met "Messages" en gras */
+}
+
+.margin-right {
+  margin-right: 20px; /* Marge droite de 20px */
+}
+.ant-layout-header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espace entre les éléments */
+}
+:focus {
+  outline: 2px solid blue; /* Changez la couleur et l'épaisseur de la bordure selon vos préférences */
+}
+.nz-menu-item:focus,
+button:focus {
+  outline: 2px solid blue; /* Adjust the color and thickness as needed */
+  background-color: #f0f0f0; /* Optional: Change background color on focus */
+}
+
+@media only screen and (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ant-layout-header-right {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-search {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .categories a,
+  .categories .ant-input-group,
+  .categories nz-dropdown {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .ant-layout-header-right a,
+  .ant-layout-header-right button {
+    width: 100%;
+    text-align: left;
+  }
+}

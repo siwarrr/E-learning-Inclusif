@@ -1,0 +1,95 @@
+<nz-layout class="welcomelayout">
+  <nz-header role="banner">
+    <div class="welcome-container ant-layout-content">
+      <div class="ant-layout-header">
+
+        <!-- Logo -->
+        <div class="logo">
+          <a routerLink="/welcome" aria-label="AllLearn">
+            <img       
+            nz-image
+            src="assets/Images/logo.png" 
+            alt="AllLearn"
+            class="logo-image"
+            >
+          </a>
+        </div>
+
+        <!-- Catégories -->
+        <div class="categories" style="float:left;">
+          <a nz-dropdown [nzDropdownMenu]="menu" [(nzVisible)]="menuVisible" 
+            nzPlacement="bottomLeft" aria-haspopup="true" tabindex="0" 
+            (keydown.enter)="toggleDropdown('menu')" (nzVisibleChange)="onMenuVisibleChange(menuVisible)">
+            {{'Categories'| translate}}
+            <span nz-icon nzType="down"></span>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu" aria-label="Categories">
+            <ul nz-menu role="menu">
+              <!-- Pour chaque espace de cours, afficher les cours correspondants -->
+              <li nz-submenu *ngFor="let space of courseSpaces" [nzTitle]="space.title" tabindex="0" (keydown)="onKeyDown($event)">
+                <ul role="menu">
+                  <li nz-menu-item *ngFor="let course of space.courses" (click)="createMessage('')" routerLink="login" tabindex="0" (keydown)="onKeyDown($event)">
+                    {{ course.title | translate }}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+
+        <nz-input-group [nzSuffix]="suffixIconSearch" class="btn-search">
+          <input type="text" nz-input placeholder="{{'Search'| translate}}" #searchInput (keyup.enter)="onSearch(searchInput.value)" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search" (click)="onSearch(searchInput.value)" tabindex="0"></span>
+          <app-search-results [searchResults]="searchResults"></app-search-results>
+        </ng-template>        
+
+
+        <!-- Éléments à droite -->
+        <div class="ant-layout-header-right" style="float:right;">
+          <!--<a nz-button nzType="link" style="margin-right: 20px; margin-bottom: 15px;"  
+          aria-label="Become Teacher" tabindex="0">Become teacher</a>-->
+
+          <button nz-button nzType="primary" class="ant-btn ant-btn-primary ant-btn-default" 
+          style="margin-top: 20px; font-weight: bolder;" routerLink="login" aria-label="login"> {{ 'Login' | translate }} 
+          </button>
+          <button nz-button nzType="default" class="ant-btn ant-btn-default ant-btn-default" 
+          style="margin-top: 20px; font-weight: bolder;" routerLink="register" aria-label="Sign Up"> {{ 'Sign up' | translate}} 
+          </button>
+
+        <!-- Language Button -->
+        <button nz-button nzShape="round" nz-dropdown [nzDropdownMenu]="languageMenu" [(nzVisible)]="languageMenuVisible" 
+          class="ant-btn ant-btn-primary ant-btn-default" 
+          style="margin-top: 20px; font-weight: bolder;" 
+          aria-label="language" nzPlacement="topRight" tabindex="0" 
+          (keydown.enter)="toggleDropdown('languageMenu')" (keydown)="onButtonKeyDown($event, 'languageMenu')">
+          {{ 'Language' | translate}}
+          <span nz-icon nzType="down"></span>
+        </button> 
+
+        <nz-dropdown-menu #languageMenu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item tabindex="0" (keydown)="onKeyDown($event)">
+              <button nz-button nzType="primary" (click)="changeLanguage('fr')" aria-label="Language">French</button>
+            </li>
+            <li nz-menu-item tabindex="0" (keydown)="onKeyDown($event)">
+              <button nz-button nzType="primary" (click)="changeLanguage('en')" aria-label="Language">English</button>
+            </li>
+            <li nz-menu-item tabindex="0" (keydown)="onKeyDown($event)">
+              <button nz-button nzType="primary" (click)="changeLanguage('ar')" aria-label="Language">Arabic</button>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+
+
+
+        </div>
+        
+      </div>
+    </div>
+  </nz-header>
+  <nz-content class="welcome-content">
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>
